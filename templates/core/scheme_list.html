@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+{% if request.user.is_authenticated %} {% if not request.user.is_staff %}
+<a class="nav-link h5" aria-current="page" href="{% url 'core:applications_status' request.user.pk %}">My Application</a>
+{% endif %}{% endif %}
+<div class="alert alert-success" role="alert">
+  <h4 class="alert-heading text-center">Welcome to Scholarship management system</h4>
+  {% if  request.user.is_staff %}<p>please <a href="{% url 'core:applications' %}">click</a> here to see the applicants</p>{% endif %} 
+</div>
+<div class="col-12 mx-auto">
+{% for s in scheme %}
+{% if not request.user.is_staff %}{% if not request.user.is_superuser %}
+<div class="alert alert-info text-danger" role="alert"><marquee>If you are eligible for Scholarship, <a href="{% url 'core:apply_schoolarship' %}">click here </a>to apply</marquee></div>
+{% endif %}{% endif %}
+<h3> Introduction</h3>
+<div class="alert alert-success" role="alert">{{ s.introduction }}</div>
+
+<h3> Income ceiling</h3>
+<div class="alert alert-secondary text-danger" role="alert">{{ s.income_ceiling }}</div>
+<h3> Value of scholarship</h3>
+<div class="alert alert-primary text-danger" role="alert"><pre>{{ s.value_of_scholarship }}</pre></div>
+<h3> How and when to apply</h3>
+
+<div class="alert alert-info" role="alert">{{ s.how_and_when_to_apply }}</div>
+<hr class = "bg-secondary py-3">
+{% endfor %}
+
+{% endblock content %}

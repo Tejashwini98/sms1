@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+<div class="col-8 mx-auto my-4">
+<h3 class="text-center alert alert-success  pt-3"role="alert">Applicant Name : {{ application.user.first_name}}</h3>
+<h3 class="text-center alert alert-success  pt-3"role="alert">Adhar Card</h3>
+<img src="{{application.adhar_card.url}}" style="height:auto; width:100%;">
+<hr>
+<h3 class="text-center alert alert-success"role="alert">ID Card</h3>
+<img src="{{application.college_id_card.url}}" style="height:auto; width:100%;">
+<hr>
+<h3 class="text-center alert alert-success"role="alert">Certificate</h3>
+<img src="{{application.certificate.url}}" style="height:auto; width:100%;">
+<hr>
+<h3 class="text-center alert alert-success"role="alert">Income Certificate</h3>
+<img src="{{application.income_certificates.url}}" style="height:auto; width:100%;">
+<hr>
+<h3 class="text-center alert alert-success"role="alert">10th marks card</h3>
+<img src="{{application.marks_cards_10th.url}}" style="height:auto; width:100%;">
+<a href="/core/applications/" class="btn btn-block btn-primary mt-3">back</a>
+</div>
+{% endblock content %}

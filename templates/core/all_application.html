@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% load static %}
+{% block content %}
+
+<div class="mx-auto">
+<div class="alert alert-success h3 text-center" role="alert">Applicant lists</div>
+<div style="overflow-x: scroll">
+    <table class="table table-bordered table-striped border-info">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Name</th>
+      <th scope="col">Adhar Card</th>
+
+      <th scope="col">Income certificate</th>
+      <th scope="col">10th marks cards</th>
+
+      <th scope="col">USN</th>
+      <th scope="col">College</th>
+      <th scope="col">Course</th>
+      <th scope="col">Caste</th>
+      <th scope="col">Merit</th>
+      <th scope="col">Status</th>
+    </tr>
+  </thead>
+  <tbody>{% for app in application %}
+    <tr>
+      <th scope="row">{{ forloop.counter }}</th>
+      <td><a href="{% url 'core:applications_detail' app.pk %}">{{ app.user.username }}</a></td>
+      <td>{{ app.adhar_card }}</td>
+
+
+      <td>{{ app.income_certificates }}</td>
+      <td>{{ app.marks_cards_10th }}</td>
+
+
+      <td>{{ app.USN }}</td>
+      <td>{{ app.college }}</td>
+      <td>{{ app.course }}</td>
+      <td>{{ app.caste }}</td>
+      <td>{{ app.merit }}</td>
+      <td> 
+      <div class="dropdown">
+        <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+            {{ app.status }}
+        </button>
+        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+            <li><a class="dropdown-item" href="{% url 'core:application_reject' app.pk %}">reject</a></li>
+            <li><a class="dropdown-item" href="{% url 'core:application_approve' app.pk %}">approve</a></li>
+            <li><a class="dropdown-item" href="{% url 'core:applications_processing' app.pk %}">processing</a></li>
+        </ul>
+    </div>
+      </td>
+    </tr>{% endfor %}
+  </tbody>
+</table>
+</div>
+</div>
+{% endblock content %}
